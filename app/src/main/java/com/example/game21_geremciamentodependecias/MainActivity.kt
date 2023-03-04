@@ -3,10 +3,12 @@ package com.example.game21_geremciamentodependecias
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.example.domain.model.Card
 import com.example.mobcompoents.cusomtoast.CustomToast
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private var cartas: MutableList<Card> = mutableListOf()
     private val gerador = Random()
 
+    private lateinit var containerPropaganda: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         setUpView()
         setListeners()
         iniciarPartida()
+        showBanner()
     }
 
     private fun setListeners() {
@@ -45,6 +49,8 @@ class MainActivity : AppCompatActivity() {
         btProximaCarta = findViewById(R.id.btProximaCarta)
         tvPontuacao = findViewById(R.id.tvPontuacao)
         ivCarta = findViewById(R.id.ivCarta)
+
+        containerPropaganda = findViewById(R.id.containerPropaganda)
     }
 
     private fun iniciarPartida() {
@@ -125,5 +131,13 @@ class MainActivity : AppCompatActivity() {
             Card(R.drawable.dama_de_espada, 10),
             Card(R.drawable.rei_de_espada, 10)
         )
+    }
+
+    private fun showBanner() {
+        containerPropaganda.visibility = if (isGratuito())  View.VISIBLE else View.GONE
+    }
+
+    private fun isGratuito(): Boolean {
+        return packageName == "com.example.game21_geremciamentodependecias.gratuito"
     }
 }

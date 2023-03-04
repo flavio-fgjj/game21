@@ -6,6 +6,18 @@ plugins {
 android {
     compileSdk 32
 
+    flavorDimensions "app"
+    productFlavors {
+        pago {
+            dimension "app"
+        }
+        gratuito {
+            dimension "app"
+            applicationIdSuffix ".gratuito"
+            versionNameSuffix "-gratuito"
+        }
+    }
+
     defaultConfig {
         applicationId "com.example.game21_geremciamentodependecias"
         minSdk 21
